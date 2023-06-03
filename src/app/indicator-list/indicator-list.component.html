@@ -7,14 +7,26 @@
 </form>
 
 <div *ngIf="indicators">
-  <h2>Indicators</h2>
-  <ul>
-    <li *ngFor="let dataPoint of indicators">
-        <strong>ID:</strong> {{ dataPoint.indicator.id }} <br>
-        <strong>Value:</strong> {{ dataPoint.indicator.value }} <br>
-        <strong>Country:</strong> {{ dataPoint.country.value }} <br>
-        <strong>Date:</strong> {{ dataPoint.date }} <br>
-        <strong>Value:</strong> {{ dataPoint.value }}
-      </li>
-  </ul>
-</div>
+    <h2>Indicators</h2>
+    <table class="indicator-table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Value</th>
+          <th>Country</th>
+          <th>Date</th>
+          <th>Value</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let dataPoint of indicators">
+          <td>{{ dataPoint.indicator.id }}</td>
+          <td>{{ dataPoint.indicator.value }}</td>
+          <td>{{ dataPoint.country.value }}</td>
+          <td>{{ dataPoint.date }}</td>
+          <td>{{ dataPoint.value }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  
