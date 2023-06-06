@@ -2,12 +2,14 @@
 
 <form (ngSubmit)="submitForm()" #form="ngForm">
   <label for="countryCode">Country Code:</label>
-  <input type="text" id="countryCode" name="countryCode" [(ngModel)]="countryCode" required #countryCodeInput="ngModel">
+  <input type="text" id="countryCode" name="countryCode" [(ngModel)]="countryCode" required pattern="{{ countryCodePattern.source }}" #countryCodeInput="ngModel">
   <div *ngIf="countryCodeInput?.invalid && (countryCodeInput?.dirty || countryCodeInput?.touched)">
     <div class="error-message" *ngIf="countryCodeInput?.errors?.['required']">Country Code is required.</div>
+    <div class="error-message" *ngIf="countryCodeInput?.errors?.['pattern']">{{ countryCodeErrorMessage }}</div>
   </div>
   <button type="submit" [disabled]="form.invalid">Submit</button>
 </form>
+<div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
 
 <div *ngIf="indicators">
     <h2>Indicators:</h2>

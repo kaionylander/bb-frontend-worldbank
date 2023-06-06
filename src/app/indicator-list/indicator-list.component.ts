@@ -18,15 +18,26 @@ export class IndicatorListComponent implements OnInit {
     this.getIndicators(this.countryCode);
   }
 
+  errorMessage: string = '';
+  countryCodePattern = /^[a-zA-Z0-9]+$/;
+  countryCodeErrorMessage = 'Special characters are not allowed.';
+
   getIndicators(countryCode: string) {
     this.indicatorApiService.getIndicators(countryCode)
-      .subscribe((data: any) => {
-        console.log(data);
-        if (data && Array.isArray(data.dataPoint)) {
-          this.indicators = data.dataPoint;
-        } else {
-          this.indicators = []; // Limpa o array de indicadores caso não seja uma lista válida
+      .subscribe(
+        (data: any) => {
+          console.log(data);
+          if (data && Array.isArray(data.dataPoint)) {
+            this.indicators = data.dataPoint;
+          } else {
+            this.indicators = []; // Limpa o array de indicadores caso não seja uma lista válida
+          }
+        },
+        (error: any) => {
+          console.error(error);
+          this.errorMessage = error;
         }
-      });
+      );
   }
+  
 }
