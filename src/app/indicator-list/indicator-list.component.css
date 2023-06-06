@@ -20,4 +20,6 @@
   .indicator-table tbody tr:hover {
     background-color: #ddd;
   }
-  
+  .error-message {
+    color: red;
+  }  

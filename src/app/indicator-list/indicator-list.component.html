@@ -1,26 +1,27 @@
-<h1>Indicator List</h1>
+<h1>Formulário de envio</h1>
 
-<form (ngSubmit)="submitForm()">
+<form (ngSubmit)="submitForm()" #form="ngForm">
   <label for="countryCode">Country Code:</label>
-  <input type="text" id="countryCode" name="countryCode" [(ngModel)]="countryCode" required>
-  <button type="submit">Submit</button>
+  <input type="text" id="countryCode" name="countryCode" [(ngModel)]="countryCode" required #countryCodeInput="ngModel">
+  <div *ngIf="countryCodeInput?.invalid && (countryCodeInput?.dirty || countryCodeInput?.touched)">
+    <div class="error-message" *ngIf="countryCodeInput?.errors?.['required']">Country Code is required.</div>
+  </div>
+  <button type="submit" [disabled]="form.invalid">Submit</button>
 </form>
 
 <div *ngIf="indicators">
-    <h2>Indicators</h2>
+    <h2>Indicators:</h2>
     <table class="indicator-table">
       <thead>
         <tr>
-          <th>ID</th>
-          <th>Value</th>
+          <th>Índice de incidência de pobreza (por dia)</th>
           <th>Country</th>
-          <th>Date</th>
+          <th>Year</th>
           <th>Value</th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let dataPoint of indicators">
-          <td>{{ dataPoint.indicator.id }}</td>
           <td>{{ dataPoint.indicator.value }}</td>
           <td>{{ dataPoint.country.value }}</td>
           <td>{{ dataPoint.date }}</td>
