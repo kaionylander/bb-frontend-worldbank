@@ -22,8 +22,12 @@ export class IndicatorListComponent implements OnInit {
   countryCodePattern = /^[a-zA-Z0-9]+$/;
   countryCodeErrorMessage = 'Special characters are not allowed.';
 
+  clearErrorMessage() {
+    this.errorMessage = ''; // Limpa a mensagem de erro
+  }
+
   getIndicators(countryCode: string) {
-    this.errorMessage = '';
+    this.clearErrorMessage();
     this.indicatorApiService.getIndicators(countryCode)
       .subscribe(
         (data: any) => {
